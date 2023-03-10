@@ -22,9 +22,13 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        Group root = new Group();
-        Scene scene = new Scene(root, 600, 600, purple);
+        // the fxml file is the root node for the initial scene
+        Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
+
+        Scene scene = new Scene(root);
         stage.setScene(scene);
+        
+        stage.setResizable(false);
         stage.setTitle("Graph Algorithms Visualizer");
         stage.show();
     }

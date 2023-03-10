@@ -1,0 +1,14 @@
+TODO:
+
+Create a program in which a user can create a graph and then visualize DFS or BFS on that graph.
+
+Program flow:
+1. On program launch the user will be presented with a scene that has "Click start to create a graph" centered horizontally and positioned towards the top of the screen. A button with "Start" will be displayed slightly below the center centered horizontally.
+2. When the user clicks "Start" the button will be highlighted green for a second and then the text that displayed "Click start to create a graph" will be replaced with "Click anywhere on the screen to add a node. When finsihed click "Done". A new button will appear underneath the text that will say "Done".
+3. When the user click on the screen a new circular node will be placed and inside of that node will be the count of that node. If the user right clcks a node that node can be deleted.
+4. When the user clicks "Done" the scene will be updated to replace the top text with "Click on a node to begin an edge, then click on another node to end the edge". The "Done" button will now proceed to the next step. If the user right clicks an edge then that edge may be deleted.
+5. When the user proceeds, then text will appear that says "Select a DFS or BFS traversal". The user will select the traversal and will be shown the traversal. Once finished the screen will display 3 buttons. "DFS" "BFS" "Quit".
+
+Step 1:
+Add text that displays "Click "Start" to create a graph".
+Add a button that displays "Start".
