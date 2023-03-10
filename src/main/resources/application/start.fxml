@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="title" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
-      <Button layoutX="475.0" layoutY="733.0" mnemonicParsing="false" text="Start" />
-      <Label layoutX="400.0" layoutY="64.0" text="Click &quot;Start&quot; to create a graph." />
+      <Button fx:id="mainButton" layoutX="475.0" layoutY="733.0" mnemonicParsing="false" onAction="#clickStart" text="Start" />
+      <Label fx:id="promptText" alignment="CENTER" layoutX="5.0" layoutY="64.0" prefHeight="16.0" prefWidth="990.0" text="Click &quot;Start&quot; to create a graph." />
    </children>
 </AnchorPane>

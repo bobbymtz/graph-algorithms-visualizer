@@ -15,5 +15,6 @@ Add a button that displays "Start".
 
 Step 2:
 1. Allow the button to be clickable.
+2. Flash the button green
 2. Change the top text.
 3. Change the button text.
