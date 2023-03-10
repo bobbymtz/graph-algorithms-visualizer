@@ -9,6 +9,11 @@ Program flow:
 4. When the user clicks "Done" the scene will be updated to replace the top text with "Click on a node to begin an edge, then click on another node to end the edge". The "Done" button will now proceed to the next step. If the user right clicks an edge then that edge may be deleted.
 5. When the user proceeds, then text will appear that says "Select a DFS or BFS traversal". The user will select the traversal and will be shown the traversal. Once finished the screen will display 3 buttons. "DFS" "BFS" "Quit".
 
-Step 1:
+Step 1: Done
 Add text that displays "Click "Start" to create a graph".
 Add a button that displays "Start".
+
+Step 2:
+1. Allow the button to be clickable.
+2. Change the top text.
+3. Change the button text.

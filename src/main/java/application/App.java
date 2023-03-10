@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -27,7 +28,7 @@ public class App extends Application
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        
+
         stage.setResizable(false);
         stage.setTitle("Graph Algorithms Visualizer");
         stage.show();
