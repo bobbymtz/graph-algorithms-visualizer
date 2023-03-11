@@ -18,7 +18,8 @@ public class Controller
     @FXML
     private Button mainButton;
     @FXML
-    private AnchorPane graphView;;
+    private AnchorPane graphView;
+    private Arrow[][] lines = new Arrow[10][10];
     // the graph will hold all of the nodes, edges, buttons and text prompts
     private static int count = 0;
     private DiGraph graph = new DiGraph();
@@ -48,22 +49,36 @@ public class Controller
         }
         else if (stage.equals(stages[2]))
         {
-            promptText.setText("Click on \"DFS\" or \"BFS\" to begin a graph traversal.");
-            mainButton.setText("DFS");
+            promptText.setText("Click on \"Topological Sort\" to get a topological sort.");
+            mainButton.setText("Topological Sort");
             stage = stages[3];
-            graphView.getChildren().remove(mainButton);
-            mainButton = new Button();
-            mainButton.setText("DFS");
-            mainButton.setLayoutX(400);
-            mainButton.setLayoutY(700);
 
-            Button BFS = new Button();
-            BFS.setText("BFS");
-            BFS.setLayoutX(600);
-            BFS.setLayoutY(700);
-            graphView.getChildren().add(mainButton);
-            graphView.getChildren().add(BFS);
+            mainButton.setText("Topological Sort");
 
+        }
+        else if (stage.equals(stages[3]))
+        {
+
+            // BFS d = new BFS(graph, ((VertexButton) e.getSource()).getVertexID(), graphView,
+            // lines);
+            IntuitiveTopological i = new IntuitiveTopological(graph);
+            String out = "";
+            if (!i.isDAG())
+            {
+                promptText.setText("No Topological sort exists: A cycle was detected.");
+            }
+            else
+            {
+                for (Integer in : i.order())
+                {
+                    out += in + "->";
+                }
+                out = out.substring(0,out.length()-2);
+                promptText.setText("A Topological sort is: " + out);
+            }
+            stage = stages[4];
+            mainButton.setText("Click here to return to the home screen.");
+                
         }
     }
 
@@ -77,29 +92,36 @@ public class Controller
             v.translateXProperty().bind(v.widthProperty().divide(-2));
             v.translateYProperty().bind(v.heightProperty().divide(-2));
             v.setVertexID(count++);
-            v.setOnAction(new EventHandler<ActionEvent>() {
-                @Override public void handle(ActionEvent e) {
-                    System.out.println(((VertexButton) e.getSource()).getVertexID()+ " pressed");
-                    if (v1 == null)
+            v.setOnAction(new EventHandler<ActionEvent>()
+            {
+                @Override
+                public void handle(ActionEvent e)
+                {
+                    if (stage.equals(stages[2]))
                     {
-                        v1 = (VertexButton)e.getSource();
-                    }
-                    else if (v2 == null)
-                    {
+                        if (v1 == null)
+                        {
+                            v1 = (VertexButton) e.getSource();
+                        }
+                        else if (v2 == null)
+                        {
 
-                        v2 = (VertexButton)e.getSource();
-                        System.out.println("v1 is " + v1);
-                        System.out.println("v2 is " + v2);
-                        Line l = new Line();
-                        l.setStartX(v1.getLayoutX());
-                        l.setStartY(v1.getLayoutY());
-                        l.setEndX(v2.getLayoutX());
-                        l.setEndY(v2.getLayoutY());
-                        graphView.getChildren().add(l);
-                        System.out.println("added a line");
-                        v1 = null;
-                        v2 = null;
+                            v2 = (VertexButton) e.getSource();
+                            System.out.println("v1 is " + v1);
+                            System.out.println("v2 is " + v2);
+                            Arrow l = new Arrow(v1.getLayoutX(), v1.getLayoutY(), v2.getLayoutX(),
+                                    v2.getLayoutY());
+                            l.setStrokeWidth(3);
+                            graphView.getChildren().add(l);
+                            lines[v1.getVertexID()][v2.getVertexID()] = l;
+                            System.out.println("added a line");
+                            graph.addEdge(v1.getVertexID(), v2.getVertexID());
+                            v1 = null;
+                            v2 = null;
+                        }
                     }
+
+
 
                 }
             });

@@ -30,7 +30,7 @@ public class App extends Application
         stage.setScene(scene);
 
         stage.setResizable(false);
-        stage.setTitle("Graph Algorithms Visualizer");
+        stage.setTitle("Topological Sort");
         stage.show();
     }
 
