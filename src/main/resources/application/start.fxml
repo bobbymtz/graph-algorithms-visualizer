@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="graphView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#addVertex" prefHeight="800.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
-      <Button fx:id="mainButton" layoutX="475.0" layoutY="733.0" mnemonicParsing="false" onAction="#clickStart" text="Start" />
+      <Button fx:id="mainButton" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="746.0" mnemonicParsing="false" onAction="#clickStart" prefHeight="24.0" prefWidth="990.0" text="Start" />
       <Label fx:id="promptText" alignment="CENTER" layoutX="5.0" layoutY="64.0" prefHeight="16.0" prefWidth="990.0" text="Click &quot;Start&quot; to create a graph." />
    </children>
 </AnchorPane>
