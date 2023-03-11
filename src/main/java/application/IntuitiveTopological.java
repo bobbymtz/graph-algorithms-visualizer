@@ -35,7 +35,10 @@ public class IntuitiveTopological
 
     public Iterable<Integer> order()
     {
-        if (!isDAG()) return null;
+        if (!isDAG())
+        {
+            return null;
+        }
         while (!graph.isEmpty())
         {
             Integer toDelete = null;

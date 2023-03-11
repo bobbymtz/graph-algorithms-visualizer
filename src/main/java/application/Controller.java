@@ -8,8 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
 public class Controller
 {
@@ -19,17 +17,17 @@ public class Controller
     private Button mainButton;
     @FXML
     private AnchorPane graphView;
-    private Arrow[][] lines = new Arrow[10][10];
-    // the graph will hold all of the nodes, edges, buttons and text prompts
+    private Arrow[][] edges = new Arrow[10][10];
+
     private static int count = 0;
     private DiGraph graph = new DiGraph();
     private String[] stages =
     {"create", "nodes", "edges", "search", "done"};
     private String stage = "create";
+
     VertexButton v1 = null;
     VertexButton v2 = null;
 
-    // when the main button is first clicked a new graph will be created
     public void clickStart(ActionEvent e)
     {
         if (stage.equals(stages[0]))
@@ -37,48 +35,63 @@ public class Controller
             promptText.setText(
                     "Click anywhere on the graph to add a vertex. Click \"Done adding vertices.\" when finished.");
             mainButton.setText("Done adding vertices.");
+
             stage = stages[1];
         }
         else if (stage.equals(stages[1]))
         {
-            promptText.setText(
-                    "Click on a vertex to start an edge and then click on another vertex to end an edge. Click \"Done adding edges\" when finished");
-            mainButton.setText("Done adding edges.");
-            stage = stages[2];
+            if (graph.getVertexCount() == 0)
+            {
+                promptText.setText("Please add vertices before proceeding.");
+                mainButton.setText("Add vertices.");
+                stage = stages[0];
+            }
+            else
+            {
 
+                promptText.setText(
+                        "Click on a vertex to start an edge and then click on another vertex to end an edge. Click \"Done adding edges\" when finished");
+                mainButton.setText("Done adding edges.");
+
+                stage = stages[2];
+            }
         }
         else if (stage.equals(stages[2]))
         {
             promptText.setText("Click on \"Topological Sort\" to get a topological sort.");
             mainButton.setText("Topological Sort");
             stage = stages[3];
-
-            mainButton.setText("Topological Sort");
-
         }
         else if (stage.equals(stages[3]))
         {
-
-            // BFS d = new BFS(graph, ((VertexButton) e.getSource()).getVertexID(), graphView,
-            // lines);
-            IntuitiveTopological i = new IntuitiveTopological(graph);
-            String out = "";
-            if (!i.isDAG())
+            IntuitiveTopological sort = new IntuitiveTopological(graph);
+            String output = "";
+            if (!sort.isDAG())
             {
                 promptText.setText("No Topological sort exists: A cycle was detected.");
             }
             else
             {
-                for (Integer in : i.order())
+                for (Integer i : sort.order())
                 {
-                    out += in + "->";
+                    output += i + "->";
                 }
-                out = out.substring(0,out.length()-2);
-                promptText.setText("A Topological sort is: " + out);
+                output = output.substring(0, output.length() - 2);
+                promptText.setText("A Topological sort is: " + output);
             }
             stage = stages[4];
             mainButton.setText("Click here to return to the home screen.");
-                
+        }
+        else if (stage.equals(stages[4]))
+        {
+            graph = new DiGraph();
+            graphView.getChildren().clear();
+            mainButton.setText("Start");
+            graphView.getChildren().add(mainButton);
+            promptText.setText("\"Click Start to create a graph.\"");
+            graphView.getChildren().add(promptText);
+            stage = stages[0];
+            count = 0;
         }
     }
 
@@ -107,28 +120,20 @@ public class Controller
                         {
 
                             v2 = (VertexButton) e.getSource();
-                            System.out.println("v1 is " + v1);
-                            System.out.println("v2 is " + v2);
-                            Arrow l = new Arrow(v1.getLayoutX(), v1.getLayoutY(), v2.getLayoutX(),
-                                    v2.getLayoutY());
-                            l.setStrokeWidth(3);
-                            graphView.getChildren().add(l);
-                            lines[v1.getVertexID()][v2.getVertexID()] = l;
-                            System.out.println("added a line");
+                            Arrow edge = new Arrow(v1.getLayoutX(), v1.getLayoutY(),
+                                    v2.getLayoutX(), v2.getLayoutY());
+                            edge.setStrokeWidth(3);
+                            graphView.getChildren().add(edge);
+                            edges[v1.getVertexID()][v2.getVertexID()] = edge;
                             graph.addEdge(v1.getVertexID(), v2.getVertexID());
                             v1 = null;
                             v2 = null;
                         }
                     }
-
-
-
                 }
             });
             graph.addVertex(v.getVertexID());
-
             graphView.getChildren().add(v);
         }
-
     }
 }

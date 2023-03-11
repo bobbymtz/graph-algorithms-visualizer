@@ -1,8 +1,8 @@
-AnchorPane{
-    -fx-background-color: rgb(152, 120, 241);
+AnchorPane {
+  -fx-background-color: rgb(152, 120, 241);
 }
-VertexButton{
-    -fx-background-color: white;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
+VertexButton {
+  -fx-background-color: white;
+  -fx-background-radius: 20;
+  -fx-border-radius: 20;
 }
