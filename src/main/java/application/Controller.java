@@ -14,8 +14,10 @@ public class Controller {
     @FXML
     private Button mainButton;
     @FXML
-    private AnchorPane graph;
+    private AnchorPane graphView;
     // the graph will hold all of the nodes, edges, buttons and text prompts
+    private static int count = 0;
+    private DiGraph graph = new DiGraph();
 
     // when the main button is first clicked a new graph will be created
     public void clickStart(ActionEvent e)
@@ -28,8 +30,10 @@ public class Controller {
         VertexButton v = new VertexButton();
         v.setLayoutX(m.getX());
         v.setLayoutY(m.getY());
+        v.setVertexID(count++);
+        graph.addVertex(v.getVertexID());
 
-        graph.getChildren().add(v);
+        graphView.getChildren().add(v);
         
     }
     
